@@ -1,0 +1,18 @@
+---
+title: Invitations
+description: Team invitation management
+---
+
+# Invitations
+
+Invite users to join as models or team members.
+
+## Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/invitations/{token}` | Get invitation (public) |
+| POST | `/api/invitations` | Create invitation |
+| POST | `/api/invitations/{token}/accept` | Accept invitation |
+| GET | `/api/invitations/model/{modelId}` | Get for model |
+| DELETE | `/api/invitations/model/{modelId}` | Delete invitation |

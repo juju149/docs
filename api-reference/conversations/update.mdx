@@ -1,0 +1,8 @@
+---
+title: Update Conversation
+api: PATCH /api/conversations/{convId}
+description: Update conversation status
+---
+<ParamField path="convId" type="string" required>Conversation ID</ParamField>
+<ParamField body="isArchived" type="boolean">Archive status</ParamField>
+<ParamField body="markAsRead" type="boolean">Mark all messages as read</ParamField>

@@ -1,0 +1,55 @@
+---
+title: Fans
+description: Understanding fan relationships in Elys
+---
+
+# Fans
+
+**Fans** are subscribers who interact with your content. Elys tracks their engagement, spending, and provides AI-powered insights.
+
+## Fan Structure
+
+```json
+{
+  "id": "fan_123",
+  "modelId": "model_abc",
+  "platform": "ONLYFANS",
+  "externalId": "of_user_456",
+  "username": "mike_loves_luna",
+  "displayName": "Mike",
+  "avatar": "https://...",
+  "totalSpent": 250.00,
+  "isSubscribed": true,
+  "subscriptionTier": "VIP",
+  "subscribedAt": "2025-12-01T00:00:00Z",
+  "expiresAt": "2026-02-01T00:00:00Z",
+  "aiScore": 85,
+  "tags": [...]
+}
+```
+
+## AI Score
+
+The **AI Score** (0-100) indicates fan engagement potential:
+
+| Score | Label | Description |
+|-------|-------|-------------|
+| 0-30 | Cold 🥶 | Low engagement, unlikely to purchase |
+| 31-50 | Warm 🌡️ | Moderate interest, needs nurturing |
+| 51-70 | Hot 🔥 | High engagement, ready to buy |
+| 71-90 | Whale 🐋 | Top spender, VIP treatment |
+| 91-100 | Superfan 💎 | Maximum value, exclusive content |
+
+## Platforms
+
+Elys supports fans from:
+
+- **ONLYFANS** - OnlyFans subscribers
+- **FANSLY** - Fansly followers  
+- **MYM** - MYM subscribers
+
+## Related Endpoints
+
+- [List Fans](/api-reference/fans/list)
+- [Get Fan](/api-reference/fans/get)
+- [Add Tag](/api-reference/fans/add-tag)

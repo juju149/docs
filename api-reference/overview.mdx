@@ -1,0 +1,84 @@
+---
+title: API Overview
+description: Overview of the Elys API endpoints
+---
+
+# API Overview
+
+The Elys API provides RESTful endpoints for managing content creator operations.
+
+## Base URL
+
+```
+http://localhost:3000
+```
+
+## Authentication
+
+All endpoints (except `/health` and `/openapi.json`) require authentication via session cookie.
+
+See [Authentication](/authentication) for details.
+
+## Response Format
+
+All responses follow a consistent format:
+
+### Success Response
+
+```json
+{
+  "data": { ... }
+}
+```
+
+### Paginated Response
+
+```json
+{
+  "data": [...],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 150,
+    "totalPages": 8
+  }
+}
+```
+
+### Error Response
+
+```json
+{
+  "error": {
+    "message": "Error description",
+    "statusCode": 400
+  }
+}
+```
+
+## Endpoint Groups
+
+| Group | Description | Base Path |
+|-------|-------------|-----------|
+| **Models** | Model profile & persona | `/api/models` |
+| **Users** | User accounts | `/api/users` |
+| **Fans** | Subscriber management | `/api/fans` |
+| **Conversations** | Chat threads | `/api/conversations` |
+| **Messages** | Individual messages | `/api/messages` |
+| **AI** | Response generation | `/api/conversations/:id/...` |
+| **Stats** | Analytics | `/api/stats` |
+| **PPV** | Pay-per-view content | `/api/ppv` |
+| **Media** | File management | `/api/media` |
+| **Tags** | Categorization | `/api/tags` |
+| **Accounts** | External platforms | `/api/accounts` |
+| **Alerts** | Notifications | `/api/alerts` |
+| **Audit** | Activity logs | `/api/audit` |
+| **Invitations** | Team invites | `/api/invitations` |
+
+## OpenAPI Spec
+
+Get the full OpenAPI specification:
+
+```bash
+curl http://localhost:3000/openapi.json
+```

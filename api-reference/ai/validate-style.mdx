@@ -1,0 +1,21 @@
+---
+title: Validate Response Style
+api: POST /api/conversations/validate-style
+description: Check if text matches the model's persona style
+---
+
+<ParamField body="modelId" type="string" required>Model ID</ParamField>
+<ParamField body="responseText" type="string" required>Text to validate</ParamField>
+
+<ResponseExample>
+```json
+{
+  "data": {
+    "matches": true,
+    "score": 0.87,
+    "feedback": ["Good emoji usage", "Tone matches persona"],
+    "suggestions": []
+  }
+}
+```
+</ResponseExample>

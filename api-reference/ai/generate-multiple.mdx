@@ -1,0 +1,20 @@
+---
+title: Generate Multiple Responses
+api: POST /api/conversations/{convId}/generate-multiple
+description: Generate 3 response variations with different tones
+---
+
+<ParamField path="convId" type="string" required>Conversation ID</ParamField>
+<ParamField body="fanMessage" type="string" required>The fan's message</ParamField>
+
+<ResponseExample>
+```json
+{
+  "data": [
+    { "content": "Hey sweetie! 💕", "confidence": 0.95 },
+    { "content": "Aw you're so sweet 🥰", "confidence": 0.88 },
+    { "content": "That made my day! 😘", "confidence": 0.91 }
+  ]
+}
+```
+</ResponseExample>

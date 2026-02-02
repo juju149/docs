@@ -1,0 +1,19 @@
+---
+title: External Accounts
+description: External platform account management
+---
+
+# External Accounts
+
+Link and manage external platform accounts (OnlyFans, Fansly, MYM).
+
+## Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/accounts` | List accounts |
+| GET | `/api/accounts/{accountId}` | Get account |
+| POST | `/api/accounts` | Link account |
+| PATCH | `/api/accounts/{accountId}` | Update credentials |
+| DELETE | `/api/accounts/{accountId}` | Unlink account |
+| POST | `/api/accounts/{accountId}/sync` | Trigger sync |

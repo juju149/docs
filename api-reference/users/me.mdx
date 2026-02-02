@@ -1,0 +1,31 @@
+---
+title: Get Current User
+api: GET /api/users/me
+description: Get the authenticated user's profile
+---
+
+### Response
+
+<ResponseField name="data" type="object">
+  <Expandable title="properties">
+    <ResponseField name="id" type="string">User ID</ResponseField>
+    <ResponseField name="email" type="string">Email address</ResponseField>
+    <ResponseField name="name" type="string">Display name</ResponseField>
+    <ResponseField name="role" type="string">User role (MANAGER or MODEL)</ResponseField>
+    <ResponseField name="modelId" type="string">Associated model ID (for MODEL role)</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+  "data": {
+    "id": "user_123",
+    "email": "creator@example.com",
+    "name": "Luna",
+    "role": "MODEL",
+    "modelId": "model_456"
+  }
+}
+```
+</ResponseExample>

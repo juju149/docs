@@ -1,0 +1,9 @@
+---
+title: List Conversations
+api: GET /api/conversations
+description: List conversations
+---
+<ParamField query="modelId" type="string">Model ID (required for MANAGER)</ParamField>
+<ParamField query="page" type="integer" default="1">Page number</ParamField>
+<ParamField query="isArchived" type="boolean">Filter by archive status</ParamField>
+<ParamField query="hasUnread" type="boolean">Filter by unread messages</ParamField>

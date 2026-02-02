@@ -1,0 +1,52 @@
+---
+title: Models
+description: Understanding models in Elys
+---
+
+# Models
+
+A **Model** represents a content creator's profile and persona in Elys. Each model has its own:
+
+- **Profile** - Name, avatar, description
+- **Persona** - AI personality configuration
+- **Fans** - Subscriber relationships
+- **Conversations** - Chat history
+- **Stats** - Revenue and engagement analytics
+
+## Model Structure
+
+```json
+{
+  "id": "model_abc123",
+  "name": "Luna",
+  "slug": "luna",
+  "avatar": "https://...",
+  "description": "Sweet and flirty...",
+  "isActive": true,
+  "managerId": "user_xyz",
+  "createdAt": "2026-01-15T10:00:00Z",
+  
+  // Persona fields
+  "personaName": "Luna",
+  "personaAge": 23,
+  "personaStyle": "flirty",
+  "baseSystemPrompt": "You are Luna...",
+  "emojiPreferences": "💕 😘 🥰 ✨",
+  "responseLength": "medium",
+  "creativityLevel": 0.8
+}
+```
+
+## Access Control
+
+| Role | Can Create | Can View | Can Edit |
+|------|-----------|----------|----------|
+| MANAGER | ✅ | All their models | ✅ |
+| MODEL | ❌ | Only their own | ❌ |
+
+## Related Endpoints
+
+- [List Models](/api-reference/models/list)
+- [Create Model](/api-reference/models/create)
+- [Update Model](/api-reference/models/update)
+- [Personality Setup](/api-reference/models/personality-setup)

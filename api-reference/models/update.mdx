@@ -1,0 +1,45 @@
+---
+title: Update Model
+api: PATCH /api/models/{modelId}
+description: Update model profile or settings
+---
+
+<Note>
+  Only users with the **MANAGER** role can update models.
+</Note>
+
+<ParamField path="modelId" type="string" required>
+  The unique identifier of the model
+</ParamField>
+
+### Request Body
+
+<ParamField body="name" type="string">
+  Display name
+</ParamField>
+
+<ParamField body="avatar" type="string">
+  Avatar image URL
+</ParamField>
+
+<ParamField body="description" type="string">
+  Model bio
+</ParamField>
+
+<ParamField body="isActive" type="boolean">
+  Active/inactive status
+</ParamField>
+
+### Response
+
+<ResponseExample>
+```json
+{
+  "data": {
+    "id": "model_abc123",
+    "name": "Luna Updated",
+    "isActive": true
+  }
+}
+```
+</ResponseExample>

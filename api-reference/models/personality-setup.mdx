@@ -1,0 +1,57 @@
+---
+title: Personality Setup
+api: POST /api/models/{modelId}/personality/quick-setup
+description: Quick setup for AI personality using presets
+---
+
+<ParamField path="modelId" type="string" required>
+  The unique identifier of the model
+</ParamField>
+
+### Request Body
+
+<ParamField body="personality" type="string" required>
+  Base personality type. Options: `douce`, `coquine`, `dominante`, `timide`, `drôle`, `intellectuelle`, `mystérieuse`
+</ParamField>
+
+<ParamField body="emojiStyle" type="string" required>
+  Emoji usage style. Options: `flirty`, `cute`, `sexy`, `casual`
+</ParamField>
+
+<ParamField body="responseStyle" type="string" required>
+  Typical response length. Options: `short`, `medium`, `long`
+</ParamField>
+
+<ParamField body="creativity" type="string" required>
+  AI creativity level. Options: `low`, `medium`, `high`
+</ParamField>
+
+<RequestExample>
+```bash
+curl -X POST http://localhost:3000/api/models/MODEL_ID/personality/quick-setup \
+  -H "Content-Type: application/json" \
+  -H "Cookie: better-auth.session_token=YOUR_TOKEN" \
+  -d '{
+    "personality": "coquine",
+    "emojiStyle": "flirty",
+    "responseStyle": "medium",
+    "creativity": "high"
+  }'
+```
+</RequestExample>
+
+### Response
+
+<ResponseExample>
+```json
+{
+  "data": {
+    "id": "model_abc123",
+    "personaStyle": "coquine",
+    "emojiPreferences": "💕 😘 🥰 😏 💋",
+    "responseLength": "medium",
+    "creativityLevel": 0.9
+  }
+}
+```
+</ResponseExample>

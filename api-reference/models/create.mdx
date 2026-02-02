@@ -1,0 +1,57 @@
+---
+title: Create Model
+api: POST /api/models
+description: Create a new model profile
+---
+
+<Note>
+  Only users with the **MANAGER** role can create models.
+</Note>
+
+### Request Body
+
+<ParamField body="name" type="string" required>
+  Display name for the model
+</ParamField>
+
+<ParamField body="slug" type="string" required>
+  URL-safe identifier (lowercase, numbers, hyphens only)
+</ParamField>
+
+<ParamField body="avatar" type="string">
+  Avatar image URL
+</ParamField>
+
+<ParamField body="description" type="string">
+  Model bio/description
+</ParamField>
+
+<RequestExample>
+```bash
+curl -X POST http://localhost:3000/api/models \
+  -H "Content-Type: application/json" \
+  -H "Cookie: better-auth.session_token=YOUR_TOKEN" \
+  -d '{
+    "name": "Luna",
+    "slug": "luna",
+    "description": "Sweet and flirty content creator"
+  }'
+```
+</RequestExample>
+
+### Response
+
+<ResponseExample>
+```json 201
+{
+  "data": {
+    "id": "model_abc123",
+    "name": "Luna",
+    "slug": "luna",
+    "isActive": true,
+    "managerId": "user_xyz",
+    "createdAt": "2026-01-15T10:00:00Z"
+  }
+}
+```
+</ResponseExample>

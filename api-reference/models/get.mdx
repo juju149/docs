@@ -1,0 +1,48 @@
+---
+title: Get Model
+api: GET /api/models/{modelId}
+description: Get detailed information about a specific model
+---
+
+<ParamField path="modelId" type="string" required>
+  The unique identifier of the model
+</ParamField>
+
+### Response
+
+<ResponseField name="data" type="object">
+  The model object with all fields
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+  "data": {
+    "id": "model_abc123",
+    "name": "Luna",
+    "slug": "luna",
+    "avatar": "https://...",
+    "description": "Sweet and flirty content creator",
+    "isActive": true,
+    "managerId": "user_xyz",
+    "createdAt": "2026-01-15T10:00:00Z",
+    "personaName": "Luna",
+    "personaAge": 23,
+    "personaStyle": "flirty",
+    "emojiPreferences": "💕 😘 🥰",
+    "responseLength": "medium",
+    "creativityLevel": 0.8
+  }
+}
+```
+</ResponseExample>
+
+### Errors
+
+<ResponseExample>
+```json 404
+{
+  "error": "Model not found"
+}
+```
+</ResponseExample>

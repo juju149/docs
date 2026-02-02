@@ -1,0 +1,9 @@
+---
+title: Create User
+api: POST /api/users
+description: Create a new user
+---
+<Note>Requires **MANAGER** role</Note>
+<ParamField body="email" type="string" required>Email address</ParamField>
+<ParamField body="name" type="string">Display name</ParamField>
+<ParamField body="role" type="string" required>User role (MANAGER or MODEL)</ParamField>

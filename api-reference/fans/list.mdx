@@ -1,0 +1,11 @@
+---
+title: List Fans
+api: GET /api/fans
+description: Get a paginated list of fans
+---
+<ParamField query="modelId" type="string">Model ID (required for MANAGER)</ParamField>
+<ParamField query="page" type="integer" default="1">Page number</ParamField>
+<ParamField query="limit" type="integer" default="20">Items per page</ParamField>
+<ParamField query="platform" type="string">Filter by ONLYFANS, FANSLY, or MYM</ParamField>
+<ParamField query="isSubscribed" type="boolean">Filter by subscription status</ParamField>
+<ParamField query="minAiScore" type="integer">Minimum AI score (0-100)</ParamField>

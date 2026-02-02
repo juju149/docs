@@ -1,0 +1,17 @@
+---
+title: Delete Model
+api: DELETE /api/models/{modelId}
+description: Permanently delete a model
+---
+
+<Warning>
+  This action cannot be undone. All associated data (fans, conversations, messages) will be deleted.
+</Warning>
+
+<ParamField path="modelId" type="string" required>
+  The unique identifier of the model
+</ParamField>
+
+### Response
+
+Returns `204 No Content` on success.

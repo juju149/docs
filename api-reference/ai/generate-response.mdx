@@ -1,0 +1,24 @@
+---
+title: Generate AI Response
+api: POST /api/conversations/{convId}/generate-response
+description: Generate a personalized AI response matching the model's persona
+---
+
+Generate a single AI-powered response that matches the model's configured personality.
+
+<ParamField path="convId" type="string" required>Conversation ID</ParamField>
+<ParamField body="fanMessage" type="string" required>The fan's message to respond to</ParamField>
+<ParamField body="fanName" type="string">Fan display name for personalization</ParamField>
+<ParamField body="fanScore" type="integer">Fan AI score (0-100)</ParamField>
+<ParamField body="fanLabel" type="string">Fan label: cold, warm, hot, whale, toxic</ParamField>
+
+<ResponseExample>
+```json
+{
+  "data": {
+    "content": "Hey babe! 💕 I'm doing amazing now that you're here 😘",
+    "confidence": 0.92
+  }
+}
+```
+</ResponseExample>

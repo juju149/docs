@@ -1,0 +1,11 @@
+---
+title: Create Message
+api: POST /api/messages
+description: Send a new message
+---
+<ParamField body="fanId" type="string" required>Fan ID</ParamField>
+<ParamField body="platform" type="string" required>ONLYFANS, FANSLY, MYM</ParamField>
+<ParamField body="externalId" type="string" required>External message ID</ParamField>
+<ParamField body="content" type="string">Message text</ParamField>
+<ParamField body="isFromFan" type="boolean" required>Whether from fan</ParamField>
+<ParamField body="sentAt" type="string" required>Timestamp</ParamField>

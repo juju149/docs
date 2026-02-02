@@ -1,0 +1,97 @@
+---
+title: AI Persona
+description: Configure your model's AI personality
+---
+
+# AI Persona
+
+The **AI Persona** defines how the AI generates responses on behalf of your model. A well-configured persona ensures authentic, on-brand messaging.
+
+## Persona Components
+
+<CardGroup cols={2}>
+  <Card title="Personality" icon="face-smile">
+    Base personality traits (flirty, shy, dominant, etc.)
+  </Card>
+  <Card title="Writing Style" icon="pen-fancy">
+    Emoji usage, response length, vocabulary
+  </Card>
+  <Card title="Boundaries" icon="shield">
+    Topics to avoid, content limits
+  </Card>
+  <Card title="Context" icon="brain">
+    Background info, interests, quirks
+  </Card>
+</CardGroup>
+
+## Quick Setup
+
+Use presets for fast configuration:
+
+```bash
+POST /api/models/:modelId/personality/quick-setup
+```
+
+```json
+{
+  "personality": "coquine",
+  "emojiStyle": "flirty",
+  "responseStyle": "medium",
+  "creativity": "high"
+}
+```
+
+### Personality Presets
+
+| Preset | Description |
+|--------|-------------|
+| `douce` | Sweet, caring, nurturing |
+| `coquine` | Playful, teasing, flirty |
+| `dominante` | Assertive, confident, in control |
+| `timide` | Shy, mysterious, hard to get |
+| `drôle` | Funny, witty, playful banter |
+| `intellectuelle` | Smart, thoughtful, deep conversations |
+| `mystérieuse` | Enigmatic, alluring, keeps them guessing |
+
+### Emoji Styles
+
+| Style | Example |
+|-------|---------|
+| `flirty` | 💕 😘 🥰 😏 💋 |
+| `cute` | 🥺 🌸 ✨ 💖 🎀 |
+| `sexy` | 🔥 😈 💦 😏 🍑 |
+| `casual` | 😊 🙈 💜 ☺️ 😌 |
+
+## Advanced Configuration
+
+For fine-grained control, update the model directly:
+
+```json
+{
+  "personaName": "Luna",
+  "personaAge": 23,
+  "personaStyle": "Sweet but secretly naughty",
+  "baseSystemPrompt": "You are Luna, a 23-year-old content creator...",
+  "emojiPreferences": "Use 💕 and 😘 frequently",
+  "responseLength": "medium",
+  "creativityLevel": 0.85,
+  "forbiddenTopics": ["politics", "religion"],
+  "signatureWords": ["babe", "sweetie", "hun"]
+}
+```
+
+## How AI Uses Persona
+
+When generating responses, the AI:
+
+1. Loads the model's persona configuration
+2. Analyzes the fan's message and history
+3. Considers the fan's AI score and label
+4. Generates a response matching the persona
+5. Validates style consistency
+
+## Related Endpoints
+
+- [Personality Setup](/api-reference/models/personality-setup)
+- [Generate Response](/api-reference/ai/generate-response)
+- [Validate Style](/api-reference/ai/validate-style)

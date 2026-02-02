@@ -1,0 +1,177 @@
+{
+    "$schema": "https://mintlify.com/schema.json",
+    "name": "Elys API",
+    "logo": {
+        "dark": "/logo/dark.svg",
+        "light": "/logo/light.svg"
+    },
+    "favicon": "/favicon.svg",
+    "colors": {
+        "primary": "#8B5CF6",
+        "light": "#A78BFA",
+        "dark": "#7C3AED",
+        "anchors": {
+            "from": "#8B5CF6",
+            "to": "#EC4899"
+        }
+    },
+    "topbarLinks": [
+        {
+            "name": "Support",
+            "url": "mailto:support@elys.io"
+        }
+    ],
+    "topbarCtaButton": {
+        "name": "Dashboard",
+        "url": "https://app.elys.io"
+    },
+    "tabs": [
+        {
+            "name": "API Reference",
+            "url": "api-reference"
+        }
+    ],
+    "anchors": [
+        {
+            "name": "GitHub",
+            "icon": "github",
+            "url": "https://github.com/elys-team/elys"
+        }
+    ],
+    "navigation": [
+        {
+            "group": "Get Started",
+            "pages": [
+                "introduction",
+                "authentication",
+                "quickstart"
+            ]
+        },
+        {
+            "group": "Core Concepts",
+            "pages": [
+                "concepts/models",
+                "concepts/fans",
+                "concepts/ai-persona"
+            ]
+        },
+        {
+            "group": "API Reference",
+            "pages": [
+                "api-reference/overview"
+            ]
+        },
+        {
+            "group": "Models",
+            "pages": [
+                "api-reference/models/list",
+                "api-reference/models/get",
+                "api-reference/models/create",
+                "api-reference/models/update",
+                "api-reference/models/delete",
+                "api-reference/models/personality-setup"
+            ]
+        },
+        {
+            "group": "Users",
+            "pages": [
+                "api-reference/users/me",
+                "api-reference/users/list",
+                "api-reference/users/get",
+                "api-reference/users/create",
+                "api-reference/users/update",
+                "api-reference/users/delete"
+            ]
+        },
+        {
+            "group": "Fans",
+            "pages": [
+                "api-reference/fans/list",
+                "api-reference/fans/get",
+                "api-reference/fans/create",
+                "api-reference/fans/update",
+                "api-reference/fans/delete",
+                "api-reference/fans/add-tag",
+                "api-reference/fans/remove-tag"
+            ]
+        },
+        {
+            "group": "Conversations",
+            "pages": [
+                "api-reference/conversations/list",
+                "api-reference/conversations/get",
+                "api-reference/conversations/update"
+            ]
+        },
+        {
+            "group": "AI Generation",
+            "pages": [
+                "api-reference/ai/generate-response",
+                "api-reference/ai/generate-multiple",
+                "api-reference/ai/validate-style"
+            ]
+        },
+        {
+            "group": "Messages",
+            "pages": [
+                "api-reference/messages/list",
+                "api-reference/messages/get",
+                "api-reference/messages/create",
+                "api-reference/messages/analyze"
+            ]
+        },
+        {
+            "group": "Stats",
+            "pages": [
+                "api-reference/stats/overview",
+                "api-reference/stats/revenue",
+                "api-reference/stats/fans",
+                "api-reference/stats/conversations",
+                "api-reference/stats/top-fans"
+            ]
+        },
+        {
+            "group": "PPV",
+            "pages": [
+                "api-reference/ppv/list",
+                "api-reference/ppv/get",
+                "api-reference/ppv/create",
+                "api-reference/ppv/update",
+                "api-reference/ppv/delete",
+                "api-reference/ppv/purchases"
+            ]
+        },
+        {
+            "group": "Media",
+            "pages": [
+                "api-reference/media/list",
+                "api-reference/media/get",
+                "api-reference/media/create",
+                "api-reference/media/update",
+                "api-reference/media/delete"
+            ]
+        },
+        {
+            "group": "Other",
+            "pages": [
+                "api-reference/tags/overview",
+                "api-reference/accounts/overview",
+                "api-reference/alerts/overview",
+                "api-reference/audit/overview",
+                "api-reference/invitations/overview"
+            ]
+        }
+    ],
+    "footerSocials": {
+        "twitter": "https://twitter.com/elys_io",
+        "github": "https://github.com/elys-team"
+    },
+    "api": {
+        "baseUrl": "http://localhost:3000",
+        "auth": {
+            "method": "key",
+            "name": "Cookie"
+        }
+    },
+    "openapi": "http://localhost:3000/openapi.json"
+}

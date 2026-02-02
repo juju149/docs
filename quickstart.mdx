@@ -1,0 +1,153 @@
+---
+title: Quick Start
+description: Get started with the Elys API in 5 minutes
+---
+
+# Quick Start
+
+Get the Elys API running locally and make your first request.
+
+## Prerequisites
+
+- Node.js 20+
+- pnpm 9+
+- PostgreSQL database
+
+## Installation
+
+<Steps>
+  <Step title="Clone the Repository">
+    ```bash
+    git clone https://github.com/elys-team/elys.git
+    cd elys
+    ```
+  </Step>
+  
+  <Step title="Install Dependencies">
+    ```bash
+    cd api
+    pnpm install
+    ```
+  </Step>
+  
+  <Step title="Configure Environment">
+    ```bash
+    cp .env.example .env
+    ```
+    
+    Edit `.env` with your database URL and API keys:
+    ```env
+    DATABASE_URL="postgresql://user:password@localhost:5432/elys"
+    BETTER_AUTH_SECRET="your-secret-key"
+    GEMINI_API_KEY="your-gemini-key"  # Optional for AI features
+    ```
+  </Step>
+  
+  <Step title="Setup Database">
+    ```bash
+    pnpm prisma migrate dev
+    pnpm prisma:seed  # Optional: add sample data
+    ```
+  </Step>
+  
+  <Step title="Start the Server">
+    ```bash
+    pnpm dev
+    ```
+    
+    The API is now running at `http://localhost:3000`
+  </Step>
+</Steps>
+
+## Verify Installation
+
+Check the API is running:
+
+```bash
+curl http://localhost:3000/health
+```
+
+**Expected response:**
+```json
+{
+  "status": "ok",
+  "timestamp": "2026-02-02T23:00:00.000Z"
+}
+```
+
+## Your First Request
+
+### 1. Get OpenAPI Spec
+
+```bash
+curl http://localhost:3000/openapi.json
+```
+
+This returns the full OpenAPI specification for the API.
+
+### 2. Create a User (via Dashboard)
+
+Start the dashboard and create an account:
+
+```bash
+cd ../dashboard
+pnpm dev
+```
+
+Navigate to `http://localhost:5173` and sign up.
+
+### 3. Create a Model
+
+After authentication, create your first model:
+
+```bash
+curl -X POST http://localhost:3000/api/models \
+  -H "Content-Type: application/json" \
+  -H "Cookie: better-auth.session_token=YOUR_TOKEN" \
+  -d '{
+    "name": "Luna",
+    "slug": "luna",
+    "description": "Sweet and flirty content creator"
+  }'
+```
+
+### 4. Setup AI Persona
+
+Configure the model's personality:
+
+```bash
+curl -X POST http://localhost:3000/api/models/MODEL_ID/personality/quick-setup \
+  -H "Content-Type: application/json" \
+  -H "Cookie: better-auth.session_token=YOUR_TOKEN" \
+  -d '{
+    "personality": "coquine",
+    "emojiStyle": "flirty",
+    "responseStyle": "medium",
+    "creativity": "high"
+  }'
+```
+
+### 5. Generate AI Response
+
+Test the AI generation:
+
+```bash
+curl -X POST http://localhost:3000/api/conversations/CONV_ID/generate-response \
+  -H "Content-Type: application/json" \
+  -H "Cookie: better-auth.session_token=YOUR_TOKEN" \
+  -d '{
+    "fanMessage": "Hey beautiful, how are you today? 😊",
+    "fanName": "Mike"
+  }'
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="AI Persona Config" icon="wand-magic-sparkles" href="/concepts/ai-persona">
+    Deep dive into persona configuration
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/overview">
+    Explore all available endpoints
+  </Card>
+</CardGroup>
