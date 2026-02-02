@@ -2692,10 +2692,8 @@
                           "type": "boolean"
                         },
                         "imageId": {
-                          "type": [
-                            "null",
-                            "string"
-                          ]
+                          "type": "string",
+                          "nullable": true
                         },
                         "confidence": {
                           "type": "number"
@@ -2707,16 +2705,12 @@
                               "type": "boolean"
                             },
                             "templateUsed": {
-                              "type": [
-                                "null",
-                                "string"
-                              ]
+                              "type": "string",
+                              "nullable": true
                             },
                             "tokensUsed": {
-                              "type": [
-                                "null",
-                                "number"
-                              ]
+                              "type": "number",
+                              "nullable": true
                             },
                             "processingTimeMs": {
                               "type": "number"
