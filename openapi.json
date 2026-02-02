@@ -1,0 +1,3343 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Elys API",
+    "description": "Elys OFM Management API - AI-powered content creator management platform",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Elys Team",
+      "url": "https://elys.io"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "better-auth.session_token",
+        "description": "Session cookie set by BetterAuth after login"
+      }
+    },
+    "schemas": {}
+  },
+  "paths": {
+    "/openapi.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/auth/{*}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "head": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "trace": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "options": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "*",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/users/": {
+      "get": {
+        "summary": "List all users",
+        "tags": [
+          "Users"
+        ],
+        "description": "Get a paginated list of all users. Only accessible by managers.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "description": "Page number"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "Items per page"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MANAGER",
+                "MODEL"
+              ]
+            },
+            "in": "query",
+            "name": "role",
+            "required": false,
+            "description": "Filter by role"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "modelId",
+            "required": false,
+            "description": "Filter by associated model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "page": {
+                          "type": "integer"
+                        },
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create user",
+        "tags": [
+          "Users"
+        ],
+        "description": "Create a new user account. Only managers can create users.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "role"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "User email address"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Display name"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "MANAGER",
+                      "MODEL"
+                    ],
+                    "description": "User role"
+                  },
+                  "modelId": {
+                    "type": "string",
+                    "description": "Associated model ID (for MODEL role)"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/me": {
+      "get": {
+        "summary": "Get current user",
+        "tags": [
+          "Users"
+        ],
+        "description": "Returns the authenticated user's profile information",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string",
+                          "enum": [
+                            "MANAGER",
+                            "MODEL"
+                          ]
+                        },
+                        "modelId": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{userId}": {
+      "get": {
+        "summary": "Get user by ID",
+        "tags": [
+          "Users"
+        ],
+        "description": "Get detailed information about a specific user",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "description": "User unique identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update user",
+        "tags": [
+          "Users"
+        ],
+        "description": "Update an existing user's profile or role",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "MANAGER",
+                      "MODEL"
+                    ]
+                  },
+                  "modelId": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "userId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user",
+        "tags": [
+          "Users"
+        ],
+        "description": "Permanently delete a user account",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "userId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/models/": {
+      "get": {
+        "summary": "List all models",
+        "tags": [
+          "Models"
+        ],
+        "description": "Get a paginated list of models the current user has access to. MANAGER users see models they manage, MODEL users see only their own model.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "description": "Page number"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "Items per page"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "isActive",
+            "required": false,
+            "description": "Filter by active status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array"
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "page": {
+                          "type": "integer"
+                        },
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new model",
+        "tags": [
+          "Models"
+        ],
+        "description": "Create a new model profile. Only MANAGER users can create models. The creating manager becomes the model's manager.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "slug"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Display name for the model"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$",
+                    "description": "URL-safe identifier (lowercase, numbers, hyphens only)"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Avatar image URL"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Model bio/description"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}": {
+      "get": {
+        "summary": "Get model details",
+        "tags": [
+          "Models"
+        ],
+        "description": "Get detailed information about a specific model including persona settings",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "description": "Model unique identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update model details",
+        "tags": [
+          "Models"
+        ],
+        "description": "Update an existing model's profile, persona, or settings. Only MANAGER users can update models.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "isActive": {
+                    "type": "boolean",
+                    "description": "Active/inactive status"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete model",
+        "tags": [
+          "Models"
+        ],
+        "description": "Permanently delete a model and all associated data. This action cannot be undone.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Model deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/personality/quick-setup": {
+      "post": {
+        "summary": "Quick personality setup",
+        "tags": [
+          "Models"
+        ],
+        "description": "Configure a model's AI personality using preset options. This provides a guided way to set up the persona without configuring each field individually.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "personality",
+                  "emojiStyle",
+                  "responseStyle",
+                  "creativity"
+                ],
+                "properties": {
+                  "personality": {
+                    "type": "string",
+                    "enum": [
+                      "douce",
+                      "coquine",
+                      "dominante",
+                      "timide",
+                      "drôle",
+                      "intellectuelle",
+                      "mystérieuse"
+                    ],
+                    "description": "Base personality type"
+                  },
+                  "emojiStyle": {
+                    "type": "string",
+                    "enum": [
+                      "flirty",
+                      "cute",
+                      "sexy",
+                      "casual"
+                    ],
+                    "description": "Emoji usage style"
+                  },
+                  "responseStyle": {
+                    "type": "string",
+                    "enum": [
+                      "short",
+                      "medium",
+                      "long"
+                    ],
+                    "description": "Typical response length"
+                  },
+                  "creativity": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ],
+                    "description": "AI creativity level"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/models/personality/presets": {
+      "get": {
+        "summary": "Get personality presets",
+        "tags": [
+          "Models"
+        ],
+        "description": "Get all available preset options for quick personality setup. Use these values with the quick-setup endpoint.",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "personalities": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "emojiStyles": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "responseStyles": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "creativityLevels": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/accounts/": {
+      "get": {
+        "summary": "List external accounts",
+        "tags": [
+          "Accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Link a new external account",
+        "tags": [
+          "Accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/accounts/{accountId}": {
+      "get": {
+        "summary": "Get external account details",
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "accountId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update external account credentials",
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "accountId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Unlink external account",
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "accountId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/accounts/{accountId}/sync": {
+      "post": {
+        "summary": "Trigger account synchronization",
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "accountId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/fans/": {
+      "get": {
+        "summary": "List fans",
+        "tags": [
+          "Fans"
+        ],
+        "description": "Get a paginated list of fans for the current model. Supports filtering by platform, subscription status, and AI score.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "description": "Page number"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "Items per page"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "modelId",
+            "required": false,
+            "description": "Model ID (required for MANAGER role)"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ONLYFANS",
+                "FANSLY",
+                "MYM"
+              ]
+            },
+            "in": "query",
+            "name": "platform",
+            "required": false,
+            "description": "Filter by platform"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "isSubscribed",
+            "required": false,
+            "description": "Filter by subscription status"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "minAiScore",
+            "required": false,
+            "description": "Minimum AI engagement score"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "description": "Search by username or display name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "page": {
+                          "type": "integer"
+                        },
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create fan",
+        "tags": [
+          "Fans"
+        ],
+        "description": "Create a new fan record (typically synced from external platform)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "externalId",
+                  "platform",
+                  "username"
+                ],
+                "properties": {
+                  "modelId": {
+                    "type": "string",
+                    "description": "Model ID (required for MANAGER role)"
+                  },
+                  "externalId": {
+                    "type": "string",
+                    "description": "External platform ID"
+                  },
+                  "platform": {
+                    "type": "string",
+                    "enum": [
+                      "ONLYFANS",
+                      "FANSLY",
+                      "MYM"
+                    ]
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "totalSpent": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "subscriptionTier": {
+                    "type": "string"
+                  },
+                  "subscribedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "expiresAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "isSubscribed": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/fans/{fanId}": {
+      "get": {
+        "summary": "Get fan details",
+        "tags": [
+          "Fans"
+        ],
+        "description": "Get detailed information about a specific fan including spending history and engagement data",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "modelId",
+            "required": false,
+            "description": "Model ID (required for MANAGER role)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "fanId",
+            "required": true,
+            "description": "Fan unique identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "displayName": {
+                          "type": "string"
+                        },
+                        "platform": {
+                          "type": "string"
+                        },
+                        "totalSpent": {
+                          "type": "number"
+                        },
+                        "isSubscribed": {
+                          "type": "boolean"
+                        },
+                        "aiScore": {
+                          "type": "integer"
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update fan",
+        "tags": [
+          "Fans"
+        ],
+        "description": "Update fan information or AI score",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "totalSpent": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "subscriptionTier": {
+                    "type": "string"
+                  },
+                  "subscribedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "expiresAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "isSubscribed": {
+                    "type": "boolean"
+                  },
+                  "aiScore": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "AI engagement score (0-100)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "fanId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete fan",
+        "tags": [
+          "Fans"
+        ],
+        "description": "Permanently delete a fan record and all associated data",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "fanId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Fan deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/fans/{fanId}/tags": {
+      "post": {
+        "summary": "Add tag to fan",
+        "tags": [
+          "Fans"
+        ],
+        "description": "Associate a tag with a fan for categorization",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "tagId"
+                ],
+                "properties": {
+                  "tagId": {
+                    "type": "string",
+                    "description": "Tag ID to add"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "fanId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/fans/{fanId}/tags/{tagId}": {
+      "delete": {
+        "summary": "Remove tag from fan",
+        "tags": [
+          "Fans"
+        ],
+        "description": "Remove a tag association from a fan",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "fanId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "tagId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Tag removed successfully"
+          }
+        }
+      }
+    },
+    "/api/conversations/": {
+      "get": {
+        "summary": "List conversations",
+        "tags": [
+          "Conversations"
+        ],
+        "description": "Get a paginated list of conversations for the model. Supports filtering by platform, archive status, and unread messages.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "description": "Page number"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "Items per page"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "modelId",
+            "required": false,
+            "description": "Model ID (required for MANAGER role)"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ONLYFANS",
+                "FANSLY",
+                "MYM"
+              ]
+            },
+            "in": "query",
+            "name": "platform",
+            "required": false,
+            "description": "Filter by platform"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "isArchived",
+            "required": false,
+            "description": "Filter by archive status"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "fanId",
+            "required": false,
+            "description": "Filter by fan ID"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "hasUnread",
+            "required": false,
+            "description": "Filter by unread messages"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "page": {
+                          "type": "integer"
+                        },
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversations/{convId}": {
+      "get": {
+        "summary": "Get conversation details",
+        "tags": [
+          "Conversations"
+        ],
+        "description": "Get detailed information about a conversation including recent messages preview",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "modelId",
+            "required": false,
+            "description": "Model ID (required for MANAGER role)"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "convId",
+            "required": true,
+            "description": "Conversation unique identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "modelId": {
+                          "type": "string"
+                        },
+                        "fanId": {
+                          "type": "string"
+                        },
+                        "platform": {
+                          "type": "string"
+                        },
+                        "lastMessageAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "lastMessagePreview": {
+                          "type": "string"
+                        },
+                        "unreadCount": {
+                          "type": "integer"
+                        },
+                        "isArchived": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update conversation",
+        "tags": [
+          "Conversations"
+        ],
+        "description": "Update conversation status (archive, mark as read)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "isArchived": {
+                    "type": "boolean",
+                    "description": "Archive or unarchive the conversation"
+                  },
+                  "markAsRead": {
+                    "type": "boolean",
+                    "description": "Mark all messages as read"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "convId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversations/{convId}/generate-response": {
+      "post": {
+        "summary": "Generate AI response",
+        "tags": [
+          "Conversations",
+          "AI"
+        ],
+        "description": "Generate a single AI-powered response that matches the model's persona. The AI uses conversation history and fan context for personalization.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fanMessage"
+                ],
+                "properties": {
+                  "fanMessage": {
+                    "type": "string",
+                    "description": "The fan's message to respond to"
+                  },
+                  "fanName": {
+                    "type": "string",
+                    "description": "Fan display name (for personalization)"
+                  },
+                  "fanScore": {
+                    "type": "integer",
+                    "description": "Fan AI score"
+                  },
+                  "fanLabel": {
+                    "type": "string",
+                    "enum": [
+                      "cold",
+                      "warm",
+                      "hot",
+                      "whale",
+                      "toxic"
+                    ],
+                    "description": "Fan engagement label"
+                  },
+                  "includeHistory": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Include conversation history"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "convId",
+            "required": true,
+            "description": "Conversation ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "content": {
+                          "type": "string",
+                          "description": "Generated response text"
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "description": "Confidence score (0-1)"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversations/{convId}/generate-multiple": {
+      "post": {
+        "summary": "Generate multiple responses",
+        "tags": [
+          "Conversations",
+          "AI"
+        ],
+        "description": "Generate 3 different response variations with varying tones for the user to choose from",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fanMessage"
+                ],
+                "properties": {
+                  "fanMessage": {
+                    "type": "string",
+                    "description": "The fan's message to respond to"
+                  },
+                  "fanName": {
+                    "type": "string"
+                  },
+                  "fanScore": {
+                    "type": "integer"
+                  },
+                  "fanLabel": {
+                    "type": "string",
+                    "enum": [
+                      "cold",
+                      "warm",
+                      "hot",
+                      "whale",
+                      "toxic"
+                    ]
+                  },
+                  "includeHistory": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "convId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "content": {
+                            "type": "string"
+                          },
+                          "confidence": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversations/validate-style": {
+      "post": {
+        "summary": "Validate response style",
+        "tags": [
+          "Conversations",
+          "AI"
+        ],
+        "description": "Analyze if a response text matches the model's configured persona style. Returns a match score and suggestions.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "modelId",
+                  "responseText"
+                ],
+                "properties": {
+                  "modelId": {
+                    "type": "string",
+                    "description": "Model ID to validate against"
+                  },
+                  "responseText": {
+                    "type": "string",
+                    "description": "Text to validate"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "matches": {
+                          "type": "boolean",
+                          "description": "Whether the text matches persona"
+                        },
+                        "score": {
+                          "type": "number",
+                          "description": "Match score (0-1)"
+                        },
+                        "feedback": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "suggestions": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/messages/": {
+      "get": {
+        "summary": "List messages",
+        "tags": [
+          "Messages"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Send a new message",
+        "tags": [
+          "Messages"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/messages/{messageId}": {
+      "get": {
+        "summary": "Get message details",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "messageId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/messages/{messageId}/analyze": {
+      "post": {
+        "summary": "Analyze message with AI",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "messageId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/media/": {
+      "get": {
+        "summary": "List media files",
+        "tags": [
+          "Media"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create media reference",
+        "tags": [
+          "Media"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/media/{mediaId}": {
+      "get": {
+        "summary": "Get media details",
+        "tags": [
+          "Media"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "mediaId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update media details",
+        "tags": [
+          "Media"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "mediaId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete media",
+        "tags": [
+          "Media"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "mediaId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/media/{mediaId}/tags": {
+      "post": {
+        "summary": "Add tag to media",
+        "tags": [
+          "Media"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "mediaId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/media/{mediaId}/tags/{tagId}": {
+      "delete": {
+        "summary": "Remove tag from media",
+        "tags": [
+          "Media"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "mediaId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "tagId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/tags/": {
+      "get": {
+        "summary": "List tags",
+        "tags": [
+          "Tags"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new tag",
+        "tags": [
+          "Tags"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/tags/{tagId}": {
+      "get": {
+        "summary": "Get tag details",
+        "tags": [
+          "Tags"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "tagId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update tag details",
+        "tags": [
+          "Tags"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "tagId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete tag",
+        "tags": [
+          "Tags"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "tagId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/ppv/": {
+      "get": {
+        "summary": "List PPV offers",
+        "tags": [
+          "PPV"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create PPV offer",
+        "tags": [
+          "PPV"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/ppv/{ppvId}": {
+      "get": {
+        "summary": "Get PPV offer details",
+        "tags": [
+          "PPV"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "ppvId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update PPV offer",
+        "tags": [
+          "PPV"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "ppvId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete PPV offer",
+        "tags": [
+          "PPV"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "ppvId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/ppv/{ppvId}/purchases": {
+      "get": {
+        "summary": "List PPV purchases",
+        "tags": [
+          "PPV"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "ppvId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/stats/overview": {
+      "get": {
+        "summary": "Get overview statistics",
+        "tags": [
+          "Stats"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/stats/revenue": {
+      "get": {
+        "summary": "Get revenue statistics",
+        "tags": [
+          "Stats"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/stats/fans": {
+      "get": {
+        "summary": "Get fan statistics",
+        "tags": [
+          "Stats"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/stats/conversations": {
+      "get": {
+        "summary": "Get conversation statistics",
+        "tags": [
+          "Stats"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/stats/top-fans": {
+      "get": {
+        "summary": "Get top spending fans",
+        "tags": [
+          "Stats"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/conversations/{conversationId}/ai/generate": {
+      "post": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Generate an AI-powered chat response",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fanMessage"
+                ],
+                "properties": {
+                  "fanMessage": {
+                    "type": "string",
+                    "description": "The fan's message to respond to"
+                  },
+                  "includeMedia": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Include media suggestions"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "description": "Model ID"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "conversationId",
+            "required": true,
+            "description": "Conversation ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "sendImage": {
+                          "type": "boolean"
+                        },
+                        "imageId": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "confidence": {
+                          "type": "number"
+                        },
+                        "metadata": {
+                          "type": "object",
+                          "properties": {
+                            "skippedGemini": {
+                              "type": "boolean"
+                            },
+                            "templateUsed": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "tokensUsed": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            },
+                            "processingTimeMs": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/conversations/{conversationId}/ai/generate-multiple": {
+      "post": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Generate multiple AI-powered chat response variations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fanMessage"
+                ],
+                "properties": {
+                  "fanMessage": {
+                    "type": "string"
+                  },
+                  "includeMedia": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "count": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "default": 3
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "conversationId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/conversations/{conversationId}/ai/memory": {
+      "get": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Get AI conversation memory (long-term and short-term)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "conversationId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/conversations/{conversationId}/ai/memory/update": {
+      "post": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Force update conversation memory (triggers summarization)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "conversationId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/conversations/{conversationId}/ai/events/purchase": {
+      "post": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Record a purchase event for memory tracking",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "itemType"
+                ],
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "itemType": {
+                    "type": "string",
+                    "description": "ppv, tip, subscription"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "conversationId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/conversations/{conversationId}/ai/events/emotional": {
+      "post": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Record an emotional event for memory tracking",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "eventType"
+                ],
+                "properties": {
+                  "eventType": {
+                    "type": "string",
+                    "enum": [
+                      "positive",
+                      "negative",
+                      "romantic",
+                      "conflict"
+                    ]
+                  },
+                  "details": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "conversationId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/ai/status": {
+      "get": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Get AI service status and configuration",
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/models/{modelId}/ai/cache/invalidate": {
+      "post": {
+        "tags": [
+          "AI Chat"
+        ],
+        "description": "Invalidate model profile cache (call after updating model profile)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/alerts/": {
+      "get": {
+        "summary": "List alerts for the current user",
+        "tags": [
+          "Alerts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/alerts/unread-count": {
+      "get": {
+        "summary": "Get count of unread alerts",
+        "tags": [
+          "Alerts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/alerts/mark-all-read": {
+      "post": {
+        "summary": "Mark all alerts as read",
+        "tags": [
+          "Alerts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/alerts/{alertId}": {
+      "get": {
+        "summary": "Get a specific alert details",
+        "tags": [
+          "Alerts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "alertId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an alert (mark as read/archived)",
+        "tags": [
+          "Alerts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "alertId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an alert",
+        "tags": [
+          "Alerts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "alertId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/audit/": {
+      "get": {
+        "summary": "List audit logs",
+        "tags": [
+          "Audit"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/audit/stats": {
+      "get": {
+        "summary": "Get audit statistics",
+        "tags": [
+          "Audit"
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/audit/{logId}": {
+      "get": {
+        "summary": "Get audit log details",
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "logId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/audit/entity/{entity}/{entityId}": {
+      "get": {
+        "summary": "Get audit logs by entity",
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "entity",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "entityId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/invitations/{token}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/invitations/": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/invitations/{token}/accept": {
+      "post": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/api/invitations/model/{modelId}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "modelId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://0.0.0.0:3000",
+      "description": "Local development server"
+    }
+  ],
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Models",
+      "description": "Model profile and persona management"
+    },
+    {
+      "name": "Users",
+      "description": "User account management"
+    },
+    {
+      "name": "Fans",
+      "description": "Fan relationship management"
+    },
+    {
+      "name": "Conversations",
+      "description": "Conversation management"
+    },
+    {
+      "name": "Messages",
+      "description": "Message management"
+    },
+    {
+      "name": "AI",
+      "description": "AI-powered features and generation"
+    },
+    {
+      "name": "Stats",
+      "description": "Analytics and statistics"
+    },
+    {
+      "name": "PPV",
+      "description": "Pay-per-view content management"
+    },
+    {
+      "name": "Media",
+      "description": "Media file management"
+    },
+    {
+      "name": "Tags",
+      "description": "Tag management"
+    },
+    {
+      "name": "Accounts",
+      "description": "External platform accounts"
+    },
+    {
+      "name": "Alerts",
+      "description": "Notification and alert management"
+    },
+    {
+      "name": "Audit",
+      "description": "Audit log access"
+    },
+    {
+      "name": "Invitations",
+      "description": "Team invitation management"
+    }
+  ]
+}

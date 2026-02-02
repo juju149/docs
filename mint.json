@@ -173,5 +173,5 @@
             "name": "Cookie"
         }
     },
-    "openapi": "http://localhost:3000/openapi.json"
+    "openapi": "openapi.json"
 }
