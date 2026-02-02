@@ -26,14 +26,21 @@ A **Model** represents a content creator's profile and persona in Elys. Each mod
   "managerId": "user_xyz",
   "createdAt": "2026-01-15T10:00:00Z",
   
-  // Persona fields
+  // Basic Persona
   "personaName": "Luna",
   "personaAge": 23,
   "personaStyle": "flirty",
-  "baseSystemPrompt": "You are Luna...",
-  "emojiPreferences": "💕 😘 🥰 ✨",
-  "responseLength": "medium",
-  "creativityLevel": 0.8
+  
+  // Enhanced Persona (New)
+  "emotionalTriggers": {
+    "happy": ["compliments", "gifts"],
+    "sad": ["being ignored"],
+    "excited": ["new subscribers"]
+  },
+  "voiceQuirks": ["always starts with 'hmm'", "uses 'literally' too much"],
+  "salesApproach": "subtle", // subtle, direct, tease
+  "currentMoodOverride": "excited",
+  "relationshipStyle": "girlfriend"
 }
 ```
 

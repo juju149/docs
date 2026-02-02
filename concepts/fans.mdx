@@ -12,21 +12,33 @@ description: Understanding fan relationships in Elys
 ```json
 {
   "id": "fan_123",
-  "modelId": "model_abc",
-  "platform": "ONLYFANS",
-  "externalId": "of_user_456",
   "username": "mike_loves_luna",
-  "displayName": "Mike",
-  "avatar": "https://...",
   "totalSpent": 250.00,
   "isSubscribed": true,
-  "subscriptionTier": "VIP",
-  "subscribedAt": "2025-12-01T00:00:00Z",
-  "expiresAt": "2026-02-01T00:00:00Z",
   "aiScore": 85,
-  "tags": [...]
+  
+  // Enhanced Psychology (New)
+  "psychProfile": {
+    "attachmentStyle": "anxious", 
+    "personality": "extrovert"
+  },
+  "communicationStyle": "flirty", // formal, casual, flirty
+  "emotionalState": "lonely",     // detected from recent messages
+  
+  // Relationship Tracking
+  "relationshipStage": "intimate", // stranger -> acquaintance -> friend -> intimate
+  "purchaseTriggers": ["loneliness", "exclusive_content"]
 }
 ```
+
+## Fan Psychology & Insights
+
+Elys automatically analyzes fan messages to extract:
+
+- **Psychological Profile**: Attachment style and personality traits
+- **Emotional State**: Real-time mood detection (happy, lonely, horny, etc.)
+- **Purchase Triggers**: What motivates them to spend
+- **Personal Info**: Extracted facts (job, location, pets) stored in memory
 
 ## AI Score
 
